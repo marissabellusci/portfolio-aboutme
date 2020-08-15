@@ -68,6 +68,17 @@ img{
   margin: auto;
 }
 
+.container{
+  transition: all 1s;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.container.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
     </style>
 
 <header class="navbar">
@@ -79,10 +90,9 @@ img{
 
 </header>
 
-    <script>
-        </script>
-
 <h1>About</h1>
+
+<div class="container">
 
 <p>Welcome to my portfolio page!</p>
 
@@ -101,6 +111,57 @@ img{
   <img src="cert1.png" alt="Image of Certification for Responsive Web Design from FreeCodeCamp.org">
   <p>Responsive Web Design Certification from FreeCodeCamp.org</p>
 </a>
+
+</div>
+
+<script>
+
+function debounce(func, wait = 10, immediate = true) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}
+
+const container = document.querySelectorAll('.container');
+
+function checkFade(e){
+  
+  container.forEach(container => {
+    //halfway thru image
+  const fadeInAt = (window.scrollY + window.innerHeight) - container.clientHeight / 2; //window.scrollY tells us how far down the page is scrolled, measured from the top. To measure from the bottom, we add the height of the window.
+    //bottom of image
+  const containerBottom = container.offsetTop + container.clientHeight;
+    
+  
+  const isHalfShown = fadeInAt > container.offsetTop;
+
+  const isNotScrolledPast = window.scrollY < containerBottom;
+
+  if(isHalfShown && isNotScrolledPast){
+    container.classList.add('active');
+  }
+
+  else{
+    container.classList.remove('active');
+  }
+
+  })
+}
+
+window.addEventListener('scroll',debounce(checkFade));
+
+window.addEventListener('load',debounce(checkFade));
+
+</script>
 
 </body>
 </html>
