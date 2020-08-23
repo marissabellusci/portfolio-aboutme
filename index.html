@@ -152,7 +152,7 @@ function checkFade(e){
   const containerBottom = container.offsetTop + container.clientHeight;
     
   
-  const isHalfShown = fadeInAt > container.offsetTop;
+  const isHalfShown = fadeInAt > container.offsetTop / 2;
 
   const isNotScrolledPast = window.scrollY < containerBottom;
 
