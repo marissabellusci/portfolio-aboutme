@@ -85,6 +85,15 @@ img{
     font-weight: 200;
     text-align: center;
   }
+
+  h1{
+    font-size: 6rem;
+  }
+
+  p{
+    margin: 3rem auto 2rem auto;
+    font-size: 3rem;
+  }
 }
 
     </style>
@@ -154,17 +163,15 @@ const container = document.querySelectorAll('.container');
 function checkFade(e){
   
   container.forEach(container => {
-    //halfway thru image
-  const fadeInAt = (window.scrollY + window.innerHeight) - container.clientHeight / 2; //window.scrollY tells us how far down the page is scrolled, measured from the top. To measure from the bottom, we add the height of the window.
+  
     //bottom of image
   const containerBottom = container.offsetTop + container.clientHeight;
     
-  
-  const isHalfShown = fadeInAt > container.offsetTop / 2;
+
 
   const isNotScrolledPast = window.scrollY < containerBottom;
 
-  if(isHalfShown && isNotScrolledPast){
+  if(isNotScrolledPast){
     container.classList.add('active');
   }
 
